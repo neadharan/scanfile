@@ -463,8 +463,9 @@
   <div id="loginCard">
     <div class="lc-top">
       <img src="nealogo.png" alt="NEA" onerror="this.style.background='#1a3a6b'"/>
-      <div class="lc-top-brand">Nepal Electricity Authority</div>
-      <div class="lc-top-brand">Dharan DCS</div>
+      <div class="lc-top-brand">
+        <h1>Nepal Electricity Authority</h1>
+      <h2>Dharan DCS</h2>
     </div>
     <div class="lc-body">
       <div class="login-title">🔐 System Login</div>
@@ -679,7 +680,7 @@
         return;
       }
 
-      let html = `<div class="result-label">${data.files.length} document फेला पर्‍यो:</div>`;
+      let html = `<div class="result-label">${data.files.length} document फेला पर्यो:</div>`;
       data.files.forEach(f => {
         html += `
           <div class="doc-item">
