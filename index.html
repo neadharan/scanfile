@@ -1,843 +1,713 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Consumer Document</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Nepali&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>NEA - Consumer Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --red:      #c0392b;
-      --blue:     #1a3a6b;
-      --green:    #1a7a3c;
-      --gold:     #d4a017;
-      --orange:   #e67e22;
-      --white:    #ffffff;
-      --light:    #f0f4f8;
-      --shadow:   rgba(0,0,0,0.18);
+      --blue:   #1a3a6b;
+      --dblue:  #0d1f3c;
+      --green:  #1a7a3c;
+      --gold:   #d4a017;
+      --orange: #e67e22;
+      --red:    #c0392b;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      display:flex;flex-direction:column;
+      overflow-x:hidden;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--light);
-      position: relative;
-      overflow-x: hidden;
+    /* BG */
+    #bg-layer{
+      position:fixed;inset:0;
+      background:url('neabg.jpg') center/cover no-repeat;
+      z-index:0;
+    }
+    #bg-overlay{
+      position:fixed;inset:0;
+      background:linear-gradient(160deg,
+        rgba(13,31,60,0.90) 0%,
+        rgba(26,122,60,0.62) 50%,
+        rgba(192,57,43,0.72) 100%);
+      z-index:1;
     }
 
-    /* ── Background Image ── */
-    #bg-layer {
-      position: fixed;
-      inset: 0;
-      background: url('neabg.jpg') center/cover no-repeat;
-      z-index: 0;
+    /* HEADER */
+    header{
+      position:relative;z-index:10;
+      background:linear-gradient(135deg,#0d1f3c 0%,#1a3a6b 55%,#0d2d18 100%);
+      box-shadow:0 4px 28px rgba(0,0,0,0.55);
+      padding:10px 22px 8px;
+      border-bottom:4px solid var(--gold);
     }
-    #bg-overlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(160deg,
-        rgba(26,58,107,0.82) 0%,
-        rgba(26,122,60,0.55) 50%,
-        rgba(192,57,43,0.65) 100%);
-      z-index: 1;
+    .hdr-inner{
+      max-width:980px;margin:0 auto;
+      display:flex;align-items:center;gap:16px;
+    }
+    .logo-ring{
+      flex-shrink:0;width:88px;height:88px;
+      border-radius:50%;overflow:hidden;
+      border:3px solid var(--gold);
+      box-shadow:0 0 0 5px rgba(212,160,23,0.22),0 4px 20px rgba(0,0,0,0.55);
+      background:#fff;
+    }
+    .logo-ring img{width:100%;height:100%;object-fit:cover;}
+    .hdr-text{flex:1;text-align:center;}
+    .hdr-text h1{
+      font-family:'Playfair Display',serif;font-weight:900;
+      font-size:clamp(1rem,3vw,1.52rem);
+      color:var(--gold);letter-spacing:1px;line-height:1.15;
+      text-shadow:0 2px 8px rgba(0,0,0,0.4);margin-bottom:2px;
+    }
+    .hdr-text h2{
+      font-size:clamp(0.78rem,2.1vw,1.04rem);font-weight:700;
+      color:#7ecfff;line-height:1.2;margin-bottom:2px;
+    }
+    .hdr-text h3{
+      font-size:clamp(0.68rem,1.7vw,0.9rem);font-weight:500;
+      color:#a8f0c0;line-height:1.2;margin-bottom:2px;
+    }
+    .hdr-text h4{
+      font-size:clamp(0.62rem,1.4vw,0.8rem);font-weight:600;
+      color:#ffb347;letter-spacing:0.8px;
+      text-transform:uppercase;line-height:1.2;
+    }
+    #logoutBtn{
+      display:none;flex-shrink:0;
+      background:linear-gradient(135deg,#c0392b,#e74c3c);
+      color:#fff;border:none;border-radius:9px;
+      padding:9px 18px;font-size:0.82rem;font-weight:700;
+      cursor:pointer;font-family:'Poppins',sans-serif;
+      box-shadow:0 3px 12px rgba(192,57,43,0.4);
+      transition:transform 0.15s,box-shadow 0.15s;
+    }
+    #logoutBtn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(192,57,43,0.5);}
+
+    /* MAIN */
+    main{
+      position:relative;z-index:10;
+      flex:1;max-width:920px;width:100%;
+      margin:36px auto;padding:0 16px;
     }
 
-    /* ── Header ── */
-    header {
-      position: relative;
-      z-index: 10;
-      background: linear-gradient(135deg, #0d1f3c 0%, #1a3a6b 60%, #0d2d18 100%);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.45);
-      padding: 10px 20px 8px;
-      border-bottom: 4px solid var(--gold);
+    /* ══ LOGIN CARD ══ */
+    #loginCard{
+      background:rgba(255,255,255,0.97);
+      border-radius:22px;
+      padding:0;
+      box-shadow:0 14px 55px rgba(0,0,0,0.38);
+      border:1px solid rgba(212,160,23,0.3);
+      max-width:430px;margin:0 auto;
+      overflow:hidden;
+    }
+    .lc-top{
+      background:linear-gradient(135deg,var(--dblue),var(--blue),#1a4d2a);
+      padding:28px 32px 22px;text-align:center;
+      border-bottom:3px solid var(--gold);
+    }
+    .lc-logo{
+      width:74px;height:74px;border-radius:50%;
+      border:3px solid var(--gold);
+      box-shadow:0 0 0 4px rgba(212,160,23,0.25);
+      object-fit:cover;background:#fff;margin:0 auto 10px;
+      display:block;
+    }
+    .lc-org{font-size:0.75rem;color:#a8f0c0;letter-spacing:0.4px;font-weight:500;}
+    .lc-body{padding:28px 30px 26px;}
+    .lc-title{
+      font-size:1.15rem;font-weight:700;
+      color:var(--blue);margin-bottom:4px;text-align:center;
+    }
+    .lc-sub{
+      font-size:0.78rem;color:#8899bb;
+      text-align:center;margin-bottom:22px;
+    }
+    .fld-grp{margin-bottom:15px;}
+    .fld-grp label{
+      display:block;font-size:0.78rem;font-weight:600;
+      color:#334;margin-bottom:5px;letter-spacing:0.2px;
+    }
+    .fld-wrap{position:relative;}
+    .fld-icon{
+      position:absolute;left:13px;top:50%;transform:translateY(-50%);
+      font-size:1rem;pointer-events:none;
+    }
+    .fld-wrap input{
+      width:100%;padding:11px 42px 11px 40px;
+      border:2px solid #dde3f0;border-radius:10px;
+      font-size:0.95rem;font-family:'Poppins',sans-serif;
+      outline:none;background:#f8faff;color:#1a2a4a;
+      transition:border 0.2s,box-shadow 0.2s;
+    }
+    .fld-wrap input:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(26,58,107,0.11);
+      background:#fff;
+    }
+    .eye-btn{
+      position:absolute;right:10px;top:50%;transform:translateY(-50%);
+      background:none;border:none;cursor:pointer;
+      font-size:1rem;color:#99aabb;padding:3px 5px;
+      transition:color 0.15s;
+    }
+    .eye-btn:hover{color:var(--blue);}
+    #loginBtn{
+      width:100%;padding:13px;margin-top:4px;
+      background:linear-gradient(135deg,var(--blue),#2255aa);
+      color:#fff;font-size:1rem;font-weight:700;
+      border:none;border-radius:10px;cursor:pointer;
+      font-family:'Poppins',sans-serif;letter-spacing:0.5px;
+      box-shadow:0 4px 16px rgba(26,58,107,0.35);
+      transition:background 0.22s,transform 0.15s,box-shadow 0.15s;
+    }
+    #loginBtn:hover{
+      background:linear-gradient(135deg,var(--green),#22a855);
+      transform:translateY(-2px);
+      box-shadow:0 6px 22px rgba(26,122,60,0.42);
+    }
+    #loginBtn:active{transform:translateY(0);}
+    #loginErr{
+      display:none;
+      background:#fff1f0;border:1.5px solid #f5c2c2;
+      border-radius:9px;padding:9px 14px;
+      font-size:0.81rem;color:var(--red);
+      text-align:center;margin-top:12px;font-weight:600;
+    }
+    .lc-footer{
+      display:flex;align-items:center;justify-content:center;
+      gap:6px;margin-top:18px;
+      font-size:0.7rem;color:#aabbcc;
     }
 
-    .header-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 18px;
+    /* ══ SEARCH CARD ══ */
+    #searchCard{
+      display:none;
+      background:rgba(255,255,255,0.97);
+      border-radius:16px;
+      padding:28px 28px 24px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.28);
+      border:1px solid rgba(212,160,23,0.3);
     }
-
-    /* Round Logo */
-    .logo-wrap {
-      flex-shrink: 0;
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--gold);
-      box-shadow: 0 0 0 4px rgba(212,160,23,0.25), 0 4px 18px rgba(0,0,0,0.5);
-      background: #fff;
+    .s-title{
+      font-size:1.08rem;font-weight:700;
+      color:var(--blue);margin-bottom:14px;
+      display:flex;align-items:center;gap:8px;
+      border-bottom:2px solid #eef2fb;padding-bottom:10px;
     }
-    .logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .s-row{display:flex;gap:10px;flex-wrap:wrap;}
+    #searchInput{
+      flex:1;min-width:200px;
+      padding:12px 18px;
+      border:2px solid #b8c8e8;border-radius:10px;
+      font-size:0.97rem;font-family:'Poppins',sans-serif;
+      outline:none;background:#f7f9ff;color:#1a2a4a;
+      transition:border 0.2s,box-shadow 0.2s;
     }
-
-    .header-text {
-      flex: 1;
-      text-align: center;
+    #searchInput:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(26,58,107,0.12);
+      background:#fff;
     }
-
-    .header-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.05rem, 3vw, 1.55rem);
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: 1px;
-      line-height: 1.15;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-      margin-bottom: 2px;
+    #searchBtn{
+      padding:12px 28px;
+      background:linear-gradient(135deg,var(--blue),#2255aa);
+      color:#fff;font-size:0.97rem;font-weight:700;
+      border:none;border-radius:10px;cursor:pointer;
+      font-family:'Poppins',sans-serif;
+      box-shadow:0 3px 12px rgba(26,58,107,0.35);
+      transition:background 0.22s,transform 0.18s,box-shadow 0.18s;
     }
-    .header-text h2 {
-      font-size: clamp(0.82rem, 2.2vw, 1.08rem);
-      font-weight: 700;
-      color: #7ecfff;
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-      margin-bottom: 2px;
+    #searchBtn:hover{
+      background:linear-gradient(135deg,var(--green),#22a855);
+      transform:translateY(-2px);
+      box-shadow:0 6px 22px rgba(26,122,60,0.45);
     }
-    .header-text h3 {
-      font-size: clamp(0.72rem, 1.8vw, 0.92rem);
-      font-weight: 500;
-      color: #a8f0c0;
-      letter-spacing: 0.3px;
-      line-height: 1.2;
-      margin-bottom: 2px;
-    }
-    .header-text h4 {
-      font-size: clamp(0.68rem, 1.6vw, 0.85rem);
-      font-weight: 600;
-      color: #ffb347;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    /* ── Main Content ── */
-    main {
-      position: relative;
-      z-index: 10;
-      flex: 1;
-      max-width: 900px;
-      width: 100%;
-      margin: 28px auto;
-      padding: 0 16px;
-    }
-
-    /* Search Card */
-    .search-card {
-      background: rgba(255,255,255,0.96);
-      border-radius: 16px;
-      padding: 28px 28px 24px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.28);
-      border: 1px solid rgba(212,160,23,0.3);
-    }
-
-    .search-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .search-title::before {
-      content: '🔍';
-      font-size: 1.2rem;
-    }
-
-    .search-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    #searchInput {
-      flex: 1;
-      min-width: 200px;
-      padding: 12px 18px;
-      border: 2px solid #b8c8e8;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-      transition: border 0.2s, box-shadow 0.2s;
-      background: #f7f9ff;
-      color: #1a2a4a;
-    }
-    #searchInput:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(26,58,107,0.12);
-      background: #fff;
-    }
-
-    #searchBtn {
-      padding: 12px 28px;
-      background: linear-gradient(135deg, var(--blue), #2255aa);
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.18s, box-shadow 0.18s, background 0.22s;
-      box-shadow: 0 3px 12px rgba(26,58,107,0.35);
-      font-family: 'Poppins', sans-serif;
-    }
-    #searchBtn:hover {
-      background: linear-gradient(135deg, #1a7a3c, #22a855);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(26,122,60,0.45);
-    }
-    #searchBtn:active {
-      transform: translateY(0);
-      background: linear-gradient(135deg, #155e2e, #1a7a3c);
+    #searchBtn:active{
+      transform:translateY(0);
+      background:linear-gradient(135deg,#155e2e,#1a7a3c);
     }
 
     /* Results */
-    #results {
-      margin-top: 22px;
+    #results{margin-top:20px;}
+    .r-label{font-size:0.8rem;color:#667;margin-bottom:10px;font-weight:600;}
+    .doc-item{
+      display:flex;align-items:center;gap:14px;
+      background:linear-gradient(90deg,#f0f6ff,#f5fff8);
+      border:1.5px solid #c8daf8;border-radius:11px;
+      padding:12px 16px;margin-bottom:10px;
+      transition:transform 0.15s,box-shadow 0.15s,border-color 0.15s;
     }
-
-    .result-label {
-      font-size: 0.82rem;
-      color: #667;
-      margin-bottom: 10px;
-      font-weight: 500;
+    .doc-item:hover{
+      transform:translateX(5px);
+      box-shadow:0 4px 18px rgba(26,58,107,0.14);
+      border-color:var(--blue);
     }
-
-    .doc-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: linear-gradient(90deg, #f0f6ff 0%, #f7fff3 100%);
-      border: 1px solid #c8daf8;
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-      text-decoration: none;
+    .doc-ico{font-size:2.1rem;flex-shrink:0;}
+    .doc-inf{flex:1;}
+    .doc-nm{font-weight:700;color:#1a2a4a;font-size:0.93rem;word-break:break-all;}
+    .doc-id{font-size:0.72rem;color:#7788aa;margin-top:2px;}
+    .doc-act{display:flex;gap:8px;flex-shrink:0;}
+    .bv,.bd{
+      padding:7px 14px;font-size:0.79rem;font-weight:700;
+      border:none;border-radius:8px;cursor:pointer;
+      font-family:'Poppins',sans-serif;
+      transition:transform 0.12s,box-shadow 0.12s;white-space:nowrap;
     }
-    .doc-item:hover {
-      transform: translateX(4px);
-      box-shadow: 0 4px 16px rgba(26,58,107,0.15);
-      border-color: var(--blue);
+    .bv{
+      background:linear-gradient(135deg,var(--green),#22a855);
+      color:#fff;box-shadow:0 2px 8px rgba(26,122,60,0.3);
     }
-
-    .doc-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
+    .bd{
+      background:linear-gradient(135deg,var(--orange),#f39c12);
+      color:#fff;box-shadow:0 2px 8px rgba(230,126,34,0.3);
     }
+    .bv:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(26,122,60,0.42);}
+    .bd:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(230,126,34,0.42);}
 
-    .doc-info { flex: 1; }
-    .doc-name {
-      font-weight: 600;
-      color: #1a2a4a;
-      font-size: 0.95rem;
-      word-break: break-all;
+    .msg-box{text-align:center;padding:32px 10px;color:#8899aa;font-size:0.93rem;}
+    .msg-box .big{font-size:2.6rem;margin-bottom:8px;}
+
+    .spin{
+      display:inline-block;width:22px;height:22px;
+      border:3px solid #c8daf8;border-top-color:var(--blue);
+      border-radius:50%;animation:rot 0.7s linear infinite;
+      vertical-align:middle;margin-right:8px;
     }
-    .doc-id {
-      font-size: 0.75rem;
-      color: #6678aa;
-      margin-top: 2px;
+    @keyframes rot{to{transform:rotate(360deg);}}
+
+    /* ══ PDF MODAL ══ */
+    #pdfModal{
+      display:none;position:fixed;inset:0;z-index:300;
+      background:rgba(0,0,0,0.80);
+      align-items:center;justify-content:center;
     }
-
-    .doc-actions {
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0;
+    #pdfModal.open{display:flex;}
+    .m-box{
+      background:#fff;border-radius:14px;
+      width:min(97vw,920px);height:min(95vh,740px);
+      display:flex;flex-direction:column;
+      box-shadow:0 20px 70px rgba(0,0,0,0.6);
+      overflow:hidden;
     }
-
-    .btn-view, .btn-dl {
-      padding: 6px 14px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 7px;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: transform 0.12s, opacity 0.12s;
-      white-space: nowrap;
+    .m-hdr{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 18px;flex-shrink:0;
+      background:linear-gradient(90deg,var(--dblue),var(--blue));
+      color:#fff;
     }
-    .btn-view {
-      background: linear-gradient(135deg, var(--green), #22a855);
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(26,122,60,0.3);
+    .m-title{flex:1;font-weight:700;font-size:0.9rem;word-break:break-all;}
+    .m-hdr button{
+      background:rgba(255,255,255,0.15);border:none;color:#fff;
+      font-size:0.8rem;font-weight:700;padding:7px 13px;
+      border-radius:7px;cursor:pointer;
+      font-family:'Poppins',sans-serif;
+      transition:background 0.15s;white-space:nowrap;
     }
-    .btn-dl {
-      background: linear-gradient(135deg, var(--orange), #f39c12);
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(230,126,34,0.3);
+    .m-hdr button:hover{background:rgba(255,255,255,0.3);}
+    #closePdf{font-size:1.05rem;padding:6px 11px;}
+    #pdfFrame{flex:1;border:none;width:100%;height:100%;background:#525659;}
+    #pdfFallback{
+      display:none;flex:1;
+      flex-direction:column;align-items:center;justify-content:center;
+      gap:18px;background:#f2f5fb;padding:36px;text-align:center;
     }
-    .btn-view:hover, .btn-dl:hover { transform: scale(1.06); opacity: 0.93; }
-
-    /* No results / loading */
-    .msg-box {
-      text-align: center;
-      padding: 30px 10px;
-      color: #889;
-      font-size: 0.95rem;
+    #pdfFallback .fb-ico{font-size:3.8rem;}
+    #pdfFallback h3{color:var(--blue);font-size:1rem;}
+    #pdfFallback p{color:#556;font-size:0.88rem;line-height:1.7;max-width:420px;}
+    .btn-newtab{
+      padding:11px 28px;
+      background:linear-gradient(135deg,var(--blue),#2255aa);
+      color:#fff;border:none;border-radius:10px;cursor:pointer;
+      font-size:0.95rem;font-weight:700;font-family:'Poppins',sans-serif;
+      box-shadow:0 3px 14px rgba(26,58,107,0.35);
+      transition:transform 0.15s;text-decoration:none;display:inline-block;
     }
-    .msg-box .big { font-size: 2.5rem; margin-bottom: 8px; }
+    .btn-newtab:hover{transform:scale(1.05);}
 
-    /* ── PDF Viewer Modal ── */
-    #pdfModal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(0,0,0,0.72);
-      align-items: center;
-      justify-content: center;
+    /* FOOTER */
+    footer{
+      position:relative;z-index:10;text-align:center;
+      padding:11px 16px;
+      background:rgba(8,16,40,0.94);
+      border-top:3px solid var(--gold);
     }
-    #pdfModal.open { display: flex; }
-
-    .modal-box {
-      background: #fff;
-      border-radius: 14px;
-      width: min(95vw, 860px);
-      height: min(95vh, 700px);
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.5);
-      overflow: hidden;
+    .ft{
+      font-size:0.87rem;font-weight:600;letter-spacing:0.4px;
+      display:flex;justify-content:center;align-items:center;
+      flex-wrap:wrap;gap:6px;
     }
+    .ft-lb{color:#aac4ff;}
+    .ft-dv{color:#ffe066;font-weight:700;}
+    .ft-sp{color:#7ecfff;}
+    .ft-cl{color:#aaffc4;}
+    .ft-ph{color:#ffb347;font-weight:700;}
 
-    .modal-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, var(--blue), #2255aa);
-      color: #fff;
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-9px)}
+      40%{transform:translateX(9px)}
+      60%{transform:translateX(-5px)}
+      80%{transform:translateX(5px)}
     }
-    .modal-title {
-      flex: 1;
-      font-weight: 700;
-      font-size: 0.92rem;
-      word-break: break-all;
+    @media(max-width:520px){
+      .doc-act{flex-direction:column;gap:5px;}
+      .logo-ring{width:66px;height:66px;}
+      .lc-body{padding:22px 18px 20px;}
     }
-    .modal-header button {
-      background: rgba(255,255,255,0.18);
-      border: none;
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.15s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .modal-header button:hover { background: rgba(255,255,255,0.3); }
-    #closePdf { font-size: 1.1rem; padding: 6px 10px; }
-
-    #pdfFrame {
-      flex: 1;
-      border: none;
-      width: 100%;
-    }
-
-    /* ── Footer ── */
-    footer {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 12px 16px;
-      background: rgba(10,20,45,0.92);
-      border-top: 3px solid var(--gold);
-    }
-
-    .footer-text {
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .ft-label  { color: #aac4ff; }
-    .ft-dev    { color: #ffe066; font-weight: 700; }
-    .ft-sep    { color: #7ecfff; }
-    .ft-clabel { color: #aaffc4; }
-    .ft-phone  { color: #ffb347; font-weight: 700; }
-
-    /* Spinner */
-    .spinner {
-      display: inline-block;
-      width: 22px; height: 22px;
-      border: 3px solid #c8daf8;
-      border-top-color: var(--blue);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 520px) {
-      .doc-actions { flex-direction: column; gap: 5px; }
-      .logo-wrap { width: 64px; height: 64px; }
-    }
-/* ══════════════════════════════
-   LOGIN CARD DESIGN
-══════════════════════════════ */
-
-#loginCard {
-  background: rgba(255,255,255,0.97);
-  border-radius: 20px;
-  padding: 40px 36px 36px;
-  box-shadow: 0 12px 50px rgba(0,0,0,0.35);
-  border: 1px solid rgba(212,160,23,0.35);
-  max-width: 420px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
-
-#loginCard::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0;
-  height:5px;
-  background: linear-gradient(90deg, #1a3a6b, #1a7a3c, #d4a017, #c0392b);
-}
-
-/* Logo */
-.login-logo-center {
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.login-logo-center img {
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  border:3px solid #d4a017;
-  box-shadow:0 4px 16px rgba(0,0,0,0.2);
-  object-fit:cover;
-}
-
-.login-brand {
-  font-size:0.78rem;
-  color:#667;
-  margin-top:6px;
-  font-weight:500;
-}
-
-/* Title */
-.login-title {
-  text-align:center;
-  font-size:1.2rem;
-  font-weight:700;
-  color:#1a3a6b;
-  margin-bottom:6px;
-}
-
-.login-sub {
-  text-align:center;
-  font-size:0.8rem;
-  color:#889;
-  margin-bottom:24px;
-}
-
-/* Input Fields */
-.field-group {
-  margin-bottom:16px;
-}
-
-.field-group label {
-  display:block;
-  font-size:0.8rem;
-  font-weight:600;
-  color:#445;
-  margin-bottom:5px;
-}
-
-.field-wrap {
-  position:relative;
-}
-
-.field-icon {
-  position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:1rem;
-  color:#aab;
-}
-
-.field-wrap input {
-  width:100%;
-  padding:11px 40px 11px 38px;
-  border:2px solid #dde4f0;
-  border-radius:10px;
-  font-size:0.95rem;
-  outline:none;
-  background:#f8faff;
-  transition:0.2s;
-}
-
-.field-wrap input:focus {
-  border-color:#1a3a6b;
-  box-shadow:0 0 0 3px rgba(26,58,107,0.1);
-  background:#fff;
-}
-
-/* Eye button */
-.eye-btn {
-  position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
-  background:none;
-  border:none;
-  cursor:pointer;
-  font-size:1rem;
-}
-
-/* Login button */
-#loginBtn {
-  width:100%;
-  padding:13px;
-  background:linear-gradient(135deg,#1a3a6b,#2255aa);
-  color:#fff;
-  font-size:1rem;
-  font-weight:700;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.2s;
-  margin-top:6px;
-}
-
-#loginBtn:hover {
-  background:linear-gradient(135deg,#1a7a3c,#22a855);
-  transform:translateY(-2px);
-}
-
-/* Error */
-#loginError {
-  display:none;
-  background:#fff0f0;
-  border:1px solid #f5c6c6;
-  border-radius:8px;
-  padding:9px 14px;
-  font-size:0.82rem;
-  color:#c0392b;
-  text-align:center;
-  margin-top:12px;
-}
-
-/* Bottom badge */
-.login-badge {
-  text-align:center;
-  margin-top:18px;
-  font-size:0.72rem;
-  color:#aab;
-}
-
   </style>
 </head>
 <body>
 
-<!-- Background -->
 <div id="bg-layer"></div>
 <div id="bg-overlay"></div>
 
-<!-- ── HEADER ── -->
+<!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <div class="logo-wrap">
+  <div class="hdr-inner">
+    <div class="logo-ring">
       <img src="nealogo.png" alt="NEA Logo" onerror="this.style.display='none'"/>
     </div>
-    <div class="header-text">
+    <div class="hdr-text">
       <h1>Nepal Electricity Authority</h1>
       <h2>Dharan Distribution Center</h2>
       <h3>Dharan, Sunsari</h3>
       <h4>Consumer Document</h4>
     </div>
+    <button id="logoutBtn" onclick="doLogout()">🔒 Logout</button>
   </div>
 </header>
 
-<!-- ── MAIN ── -->
+<!-- MAIN -->
 <main>
-<div id="loginCard">
-    <div class="login-logo-center">
-      <img src="nealogo.png" alt="NEA" onerror="this.style.display='none'"/>
-      <div class="login-brand">Nepal Electricity Authority</div>
-    </div>
-    <div class="login-title">🔐 System Login</div>
-    <div class="login-sub">कृपया username र password राख्नुहोस्</div>
 
-    <div class="field-group">
-      <label>👤 Username</label>
-      <div class="field-wrap">
-        <span class="field-icon">👤</span>
-        <input type="text" id="usernameInput" placeholder="Username" autocomplete="off"/>
+  <!-- LOGIN CARD -->
+  <div id="loginCard">
+    <div class="lc-top">
+      <img class="lc-logo" src="nealogo.png" alt="NEA" onerror="this.style.display='none'"/>
+      <div class="lc-org">Nepal Electricity Authority · Dharan DCS</div>
+    </div>
+    <div class="lc-body">
+      <div class="lc-title">🔐 System Login</div>
+      <div class="lc-sub">कृपया आफ्नो Username र Password राख्नुहोस्</div>
+
+      <div class="fld-grp">
+        <label>👤 Username</label>
+        <div class="fld-wrap">
+          <span class="fld-icon">👤</span>
+          <input type="text" id="uInp" placeholder="Username" autocomplete="off"/>
+        </div>
       </div>
-    </div>
 
-    <div class="field-group">
-      <label>🔑 Password</label>
-      <div class="field-wrap">
-        <span class="field-icon">🔑</span>
-        <input type="password" id="passwordInput" placeholder="Password" autocomplete="off"/>
-        <button class="eye-btn" type="button" onclick="togglePwd()" id="eyeBtn" title="Show/Hide">👁</button>
+      <div class="fld-grp">
+        <label>🔑 Password</label>
+        <div class="fld-wrap">
+          <span class="fld-icon">🔑</span>
+          <input type="password" id="pInp" placeholder="Password" autocomplete="off"/>
+          <button class="eye-btn" id="eyeBtn" type="button" onclick="toggleEye()">👁</button>
+        </div>
       </div>
-    </div>
 
-    <button id="loginBtn" onclick="doLogin()">Login →</button>
-    <div id="loginError">❌ गलत Username वा Password!</div>
-
-    <div class="login-badge">
-      <span>🔒</span> Secure System — NEA Dharan DCS
+      <button id="loginBtn" onclick="doLogin()">🔓 Login &rarr;</button>
+      <div id="loginErr">❌ गलत Username वा Password! पुनः प्रयास गर्नुहोस्।</div>
+      <div class="lc-footer">🔒 Secure Login · NEA Dharan Distribution Center</div>
     </div>
   </div>
 
-<div class="search-card" id="searchCard"
- style="display:none">
-
-  
-    <div class="search-title">उपभोक्ता कागजात खोज्नुहोस्</div>
-
-    <div class="search-row">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Document काे नाम वा ID टाइप गर्नुहोस्"
-        autocomplete="off"
-        autofocus
-      />
+  <!-- SEARCH CARD -->
+  <div id="searchCard">
+    <div class="s-title">📂 उपभोक्ता कागजात खोज्नुहोस्</div>
+    <div class="s-row">
+      <input type="text" id="searchInput"
+        placeholder="नाम वा ID नम्बर टाइप गर्नुहोस्…" autocomplete="off"/>
       <button id="searchBtn" onclick="searchDocs()">🔍 खोज्नुहोस्</button>
     </div>
-
     <div id="results">
       <div class="msg-box">
         <div class="big">📂</div>
-        <div>Search Scan Document</div>
+        <div>नाम वा ID नम्बर टाइप गरेर document खोज्नुहोस्</div>
       </div>
     </div>
   </div>
+
 </main>
 
-<!-- ── PDF VIEWER MODAL ── -->
+<!-- PDF MODAL -->
 <div id="pdfModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span class="modal-title" id="pdfTitle">Document</span>
-      <button onclick="printPdf()">🖨️ Print</button>
-      <button id="dlBtn" onclick="downloadPdf()">⬇️ Download</button>
+  <div class="m-box">
+    <div class="m-hdr">
+      <span class="m-title" id="pdfTitle">Document</span>
+      <button onclick="printDoc()">🖨️ Print</button>
+      <button onclick="downloadDoc()">⬇️ Download</button>
       <button id="closePdf" onclick="closeModal()">✕</button>
     </div>
-    <iframe id="pdfFrame" src=""></iframe>
+    <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+    <div id="pdfFallback">
+      <div class="fb-ico">📄</div>
+      <h3>Document Preview</h3>
+      <p>
+        यो document browser मा directly देखाउन सकिएन।<br/>
+        तलको button click गरेर Google Drive मा खोल्नुहोस् —<br/>
+        त्यहाँबाट <b>Print</b> र <b>Download</b> गर्न सकिन्छ।
+      </p>
+      <a id="openTabLink" href="#" target="_blank" class="btn-newtab">
+        🔗 Google Drive मा खोल्नुहोस्
+      </a>
+    </div>
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-text">
-    <span class="ft-label">System Developed By :-</span>
-    <span class="ft-dev">Dharan DCS</span>
-    <span class="ft-sep">|</span>
-    <span class="ft-clabel">Contact No :-</span>
-    <span class="ft-phone">9842459642</span>
+  <div class="ft">
+    <span class="ft-lb">System Developed By :-</span>
+    <span class="ft-dv">Dharan DCS</span>
+    <span class="ft-sp">|</span>
+    <span class="ft-cl">Contact No :-</span>
+    <span class="ft-ph">9842459642</span>
   </div>
 </footer>
 
 <script>
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNNHgheHa6PMo4hBZgRbZBd9CYdOJsEuk9CXkK_Xonu09ChYfu9xg3XbGMcI2tdXUr/exec';
+// ════════════════════════════════════════
+//  CONFIG
+// ════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzm1VUg2XCDBiA9I0HuN9QFA54Ekgh2caQplYkWlJq3BLZ1vHklvlROitn9L8eW97Aj/exec';
 
-  let currentFileId = '';
-  let currentFileName = '';
+// Credentials in base64 (not plain text visible)
+// username = nea  |  password = nea@2082
+const CU = atob('bmVh');
+const CP = atob('bmVhQDIwODI=');
 
-  
-  window.addEventListener('load', function(){
+// ── Auth state stored in JS variable only ──
+// This works for file:// AND http:// both
+var IS_LOGGED_IN = false;
 
-    const input = document.getElementById('searchInput');
+var gFileId   = '';
+var gFileName = '';
 
-    if(input){
-      input.addEventListener('keydown', function(e){
-        if (e.key === 'Enter') searchDocs();
-      });
-    }
+// ════════════════════════════════════════
+//  INIT — show login page always on load
+// ════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', function() {
+  // Always start at login page
+  showLogin();
 
-    // Enter key login
-    document.getElementById('passwordInput').addEventListener('keydown', function(e){
-      if(e.key === 'Enter') doLogin();
-    });
+  document.getElementById('uInp').addEventListener('keydown',    function(e){ if(e.key==='Enter') doLogin(); });
+  document.getElementById('pInp').addEventListener('keydown',    function(e){ if(e.key==='Enter') doLogin(); });
+  document.getElementById('searchInput').addEventListener('keydown', function(e){ if(e.key==='Enter') searchDocs(); });
+});
 
-  });
+// ════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════
+function doLogin() {
+  var u   = document.getElementById('uInp').value.trim();
+  var p   = document.getElementById('pInp').value;
+  var err = document.getElementById('loginErr');
 
-  async function searchDocs() {
-    const query = document.getElementById('searchInput').value.trim();
-    const resultsDiv = document.getElementById('results');
-
-    if (!query) {
-      resultsDiv.innerHTML = `
-        <div class="msg-box">
-          <div class="big">📂</div>
-          <div>Document काे नाम वा ID टाइप गर्नुहोस्</div>
-        </div>`;
-      return;
-    }
-
-    resultsDiv.innerHTML = `
-      <div class="msg-box">
-        <span class="spinner"></span> तपाइकाे Docoment खोजि कार्यहुदै छ…
-      </div>`;
-
-    try {
-      const url = APPS_SCRIPT_URL + '?action=search&query=' + encodeURIComponent(query);
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (!data.files || data.files.length === 0) {
-        resultsDiv.innerHTML = `
-          <div class="msg-box">
-            <div class="big">🔎</div>
-            <div><b>"${escHtml(query)}"</b> कुनै document फेला परेन।</div>
-          </div>`;
-        return;
-      }
-
-      let html = `<div class="result-label">${data.files.length} document फेला पर्‍यो:</div>`;
-      data.files.forEach(f => {
-        html += `
-          <div class="doc-item">
-            <div class="doc-icon">📄</div>
-            <div class="doc-info">
-              <div class="doc-name">${escHtml(f.name)}</div>
-            </div>
-            <div class="doc-actions">
-              <button class="btn-view" onclick="viewPdf('${escHtml(f.id)}','${escHtml(f.name).replace(/'/g,"\\'")}')">👁 View</button>
-              <button class="btn-dl" onclick="dlFile('${escHtml(f.id)}','${escHtml(f.name).replace(/'/g,"\\'")}')">⬇ Download</button>
-            </div>
-          </div>`;
-      });
-
-      resultsDiv.innerHTML = html;
-
-    } catch(err) {
-      resultsDiv.innerHTML = `
-        <div class="msg-box">
-          <div class="big">⚠️</div>
-          <div>Server सँग जडान हुन सकिएन।</div>
-        </div>`;
-    }
-  }
-
-  
-  function doLogin(){
-  const u = document.getElementById('usernameInput').value.trim();
-  const p = document.getElementById('passwordInput').value.trim();
-  const errorBox = document.getElementById('loginError');
-
-  // ❗ EMPTY CHECK
-  if(u === '' || p === ''){
-    errorBox.style.display = 'block';
-    errorBox.innerHTML = '⚠️ कृपया Username र Password राख्नुहोस्';
-    return;
-  }
-
-  // ❗ CORRECT LOGIN
-  if(u === 'nea' && p === 'nea'){
-
-    // hide login
-    document.getElementById('loginCard').style.display = 'none';
-
-    // show search
-    document.getElementById('searchCard').style.display = 'block';
-
-    // focus search
-    setTimeout(()=>{
-      document.getElementById('searchInput').focus();
-    },100);
-
-    errorBox.style.display='none';
-
-  }else{
-    // ❗ WRONG LOGIN
-    errorBox.style.display='block';
-    errorBox.innerHTML = '❌ गलत Username वा Password!';
+  if (u === CU && p === CP) {
+    IS_LOGGED_IN = true;
+    err.style.display = 'none';
+    showDash();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pInp').value = '';
+    document.getElementById('pInp').focus();
+    // shake
+    var card = document.getElementById('loginCard');
+    card.style.animation = 'none';
+    void card.offsetWidth;
+    card.style.animation = 'shake 0.42s ease';
   }
 }
 
-  
-  function togglePwd(){
-    const pwd = document.getElementById('passwordInput');
-    const eye = document.getElementById('eyeBtn');
+// ════════════════════════════════════════
+//  LOGOUT  ← यहाँ fix छ
+// ════════════════════════════════════════
+function doLogout() {
+  if (!confirm('Logout गर्नुहुन्छ?')) return;
 
-    if(pwd.type === 'password'){
-      pwd.type = 'text';
-      eye.textContent = '🙈';
-    }else{
-      pwd.type = 'password';
-      eye.textContent = '👁';
+  // Reset auth flag
+  IS_LOGGED_IN = false;
+
+  // Clear fields
+  document.getElementById('uInp').value  = '';
+  document.getElementById('pInp').value  = '';
+  document.getElementById('loginErr').style.display = 'none';
+
+  // Clear search
+  document.getElementById('searchInput').value = '';
+  document.getElementById('results').innerHTML = defaultMsg();
+
+  // Close modal if open
+  closeModal();
+
+  // ← Go back to login page
+  showLogin();
+}
+
+// ════════════════════════════════════════
+//  SHOW / HIDE PAGES
+// ════════════════════════════════════════
+function showLogin() {
+  document.getElementById('loginCard').style.display  = 'block';
+  document.getElementById('searchCard').style.display = 'none';
+  document.getElementById('logoutBtn').style.display  = 'none';
+  setTimeout(function(){ document.getElementById('uInp').focus(); }, 100);
+}
+
+function showDash() {
+  document.getElementById('loginCard').style.display  = 'none';
+  document.getElementById('searchCard').style.display = 'block';
+  document.getElementById('logoutBtn').style.display  = 'block';
+  setTimeout(function(){ document.getElementById('searchInput').focus(); }, 100);
+}
+
+function toggleEye() {
+  var inp = document.getElementById('pInp');
+  var btn = document.getElementById('eyeBtn');
+  if (inp.type === 'password') { inp.type = 'text';     btn.textContent = '🙈'; }
+  else                         { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+// ════════════════════════════════════════
+//  SEARCH
+// ════════════════════════════════════════
+async function searchDocs() {
+  if (!IS_LOGGED_IN) { showLogin(); return; }
+
+  var q   = document.getElementById('searchInput').value.trim();
+  var div = document.getElementById('results');
+
+  if (!q) { div.innerHTML = defaultMsg(); return; }
+
+  div.innerHTML = '<div class="msg-box"><span class="spin"></span> खोज्दै छौं…</div>';
+
+  try {
+    var url  = SCRIPT_URL + '?action=search&query=' + encodeURIComponent(q);
+    var res  = await fetch(url);
+    var data = await res.json();
+
+    if (!data.files || data.files.length === 0) {
+      div.innerHTML =
+        '<div class="msg-box"><div class="big">🔎</div><div><b>"' +
+        esc(q) + '"</b> को लागि कुनै document फेला परेन।</div></div>';
+      return;
     }
-  }
 
-  function viewPdf(fileId, fileName) {
-    currentFileId = fileId;
-    currentFileName = fileName;
-    document.getElementById('pdfTitle').textContent = fileName;
-    document.getElementById('pdfFrame').src =
-      'https://drive.google.com/file/d/' + fileId + '/preview';
-    document.getElementById('pdfModal').classList.add('open');
-  }
+    var html = '<div class="r-label">' + data.files.length + ' document(s) फेला पर्‍यो:</div>';
+    data.files.forEach(function(f) {
+      var sn = esc(f.name);
+      var jn = f.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      html +=
+        '<div class="doc-item">' +
+          '<div class="doc-ico">📄</div>' +
+          '<div class="doc-inf">' +
+            '<div class="doc-nm">' + sn + '</div>' +
+            '<div class="doc-id">ID: ' + esc(f.id) + '</div>' +
+          '</div>' +
+          '<div class="doc-act">' +
+            '<button class="bv" onclick="viewPdf(\'' + f.id + '\',\'' + jn + '\')">👁 View</button>' +
+            '<button class="bd" onclick="dlFile(\'' + f.id + '\',\'' + jn + '\')">⬇ Download</button>' +
+          '</div>' +
+        '</div>';
+    });
+    div.innerHTML = html;
 
-  function closeModal() {
-    document.getElementById('pdfModal').classList.remove('open');
-    document.getElementById('pdfFrame').src = '';
+  } catch(e) {
+    div.innerHTML =
+      '<div class="msg-box"><div class="big">⚠️</div>' +
+      '<div>Server सँग जडान हुन सकिएन।<br/><small>' + e.message + '</small></div></div>';
   }
+}
 
-  function printPdf() {
-    const frame = document.getElementById('pdfFrame');
+// ════════════════════════════════════════
+//  PDF VIEWER
+// ════════════════════════════════════════
+function viewPdf(id, name) {
+  if (!IS_LOGGED_IN) { showLogin(); return; }
+
+  gFileId   = id;
+  gFileName = name;
+
+  document.getElementById('pdfTitle').textContent = name;
+  document.getElementById('pdfModal').classList.add('open');
+
+  var frame    = document.getElementById('pdfFrame');
+  var fallback = document.getElementById('pdfFallback');
+  var tabLink  = document.getElementById('openTabLink');
+
+  frame.style.display    = 'block';
+  fallback.style.display = 'none';
+  frame.src = '';
+
+  var previewUrl = 'https://drive.google.com/file/d/' + id + '/preview';
+  var viewUrl    = 'https://drive.google.com/file/d/' + id + '/view';
+
+  tabLink.href = viewUrl;
+  frame.src    = previewUrl;
+
+  // After 6s check if iframe loaded, if blocked show fallback
+  setTimeout(function() {
     try {
-      frame.contentWindow.print();
-    } catch(e) {
-      window.open('https://drive.google.com/file/d/' + currentFileId + '/view', '_blank');
+      var doc = frame.contentDocument || frame.contentWindow.document;
+      if (!doc || !doc.body || doc.body.innerHTML.trim() === '') {
+        frame.style.display    = 'none';
+        fallback.style.display = 'flex';
+      }
+    } catch(err) {
+      // cross-origin = page loaded OK = keep iframe showing
     }
-  }
+  }, 6000);
+}
 
-  function downloadPdf() {
-    dlFile(currentFileId, currentFileName);
-  }
+function closeModal() {
+  document.getElementById('pdfModal').classList.remove('open');
+  document.getElementById('pdfFrame').src = '';
+  document.getElementById('pdfFrame').style.display    = 'block';
+  document.getElementById('pdfFallback').style.display = 'none';
+}
 
-  function dlFile(fileId, fileName) {
-    const a = document.createElement('a');
-    a.href = 'https://drive.google.com/uc?export=download&id=' + fileId;
-    a.download = fileName;
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+function printDoc() {
+  var url = 'https://drive.google.com/file/d/' + gFileId + '/view';
+  var w   = window.open(url, '_blank');
+  if (w) setTimeout(function(){ try{ w.print(); }catch(e){} }, 2500);
+}
 
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;');
-  }
+function downloadDoc() { dlFile(gFileId, gFileName); }
 
-  document.getElementById('pdfModal').addEventListener('click', function(e){
-    if (e.target === this) closeModal();
-  });
+function dlFile(id, name) {
+  var a = document.createElement('a');
+  a.href     = 'https://drive.google.com/uc?export=download&id=' + id;
+  a.download = name;
+  a.target   = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+// ════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function defaultMsg() {
+  return '<div class="msg-box"><div class="big">📂</div><div>नाम वा ID नम्बर टाइप गरेर document खोज्नुहोस्</div></div>';
+}
+
+// Close modal clicking backdrop
+document.getElementById('pdfModal').addEventListener('click', function(e){
+  if (e.target === this) closeModal();
+});
 </script>
 </body>
 </html>
