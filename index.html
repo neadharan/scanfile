@@ -31,7 +31,7 @@
       overflow-x: hidden;
     }
 
-   
+    
     #bg-layer {
       position: fixed; inset: 0;
       background: url('neabg.jpg') center/cover no-repeat;
@@ -121,7 +121,7 @@
       min-height: 0;
     }
 
-    
+   
     #loginCard {
       background: rgba(255,255,255,0.97);
       border-radius: 20px;
@@ -249,7 +249,7 @@
       font-size: 0.68rem; color: #bbcce0;
     }
 
-    
+   
     #searchCard {
       display: none;
       width: 100%; max-width: 900px;
@@ -302,7 +302,7 @@
       background: linear-gradient(135deg, #155e2e, #1a7a3c);
     }
 
-   
+    /* Results */
     #results { margin-top: 22px; }
 
     .result-label {
@@ -354,7 +354,7 @@
     }
     .msg-box .big { font-size: 2.5rem; margin-bottom: 8px; }
 
-    
+    /* Spinner */
     .spinner {
       display: inline-block; width: 22px; height: 22px;
       border: 3px solid #c8daf8; border-top-color: var(--blue);
@@ -417,7 +417,7 @@
     .ft-clabel { color: #aaffc4; }
     .ft-phone  { color: #ffb347; font-weight: 700; }
 
-    
+    /* Shake animation */
     @keyframes shake {
       0%,100%{ transform:translateX(0); }
       20%    { transform:translateX(-8px); }
@@ -451,7 +451,7 @@
       <h3>Dharan, Sunsari</h3>
       <h4>Consumer Document</h4>
     </div>
-    
+    <!-- Logout button (header right side) -->
     <button id="logoutBtn" onclick="doLogout()">🔒 Logout</button>
   </div>
 </header>
@@ -463,13 +463,11 @@
   <div id="loginCard">
     <div class="lc-top">
       <img src="nealogo.png" alt="NEA" onerror="this.style.background='#1a3a6b'"/>
-      <div class="lc-top-brand">
-        Nepal Electricity Authority<br>
-        Dharan DCS
-        </div>
+      <div class="lc-top-brand">Nepal Electricity Authority-Dharan DCS</div>
+    </div>
     <div class="lc-body">
       <div class="login-title">🔐 System Login</div>
-      <div class="login-sub">username र password राख्नुहोस्</div>
+      <div class="login-sub"> username र password राख्नुहोस्</div>
 
       <div class="field-group">
         <label>👤 Username</label>
@@ -490,7 +488,7 @@
 
       <button id="loginBtn" onclick="doLogin()">🔓 Login →</button>
       <div id="loginError">❌ गलत Username वा Password!</div>
-      <div class="login-badge">🔒 NEA Dharan DCS</div>
+      <div class="login-badge">🔒 Secure System — NEA Dharan DCS</div>
     </div>
   </div>
 
@@ -560,12 +558,12 @@
     document.getElementById('usernameInput').addEventListener('keydown', function(e){
       if (e.key === 'Enter') document.getElementById('passwordInput').focus();
     });
-    
+   
     document.getElementById('searchInput').addEventListener('keydown', function(e){
       if (e.key === 'Enter') searchDocs();
     });
   });
-  
+
   
   function doLogin() {
     const u = document.getElementById('usernameInput').value.trim();
@@ -587,7 +585,7 @@
       errBox.innerHTML = '❌ गलत Username वा Password!';
       document.getElementById('passwordInput').value = '';
       document.getElementById('passwordInput').focus();
-      
+     
       const card = document.getElementById('loginCard');
       card.style.animation = 'none';
       void card.offsetWidth;
@@ -600,12 +598,12 @@
 
     IS_LOGGED_IN = false;
 
-   
+    
     document.getElementById('usernameInput').value = '';
     document.getElementById('passwordInput').value = '';
     document.getElementById('loginError').style.display = 'none';
 
-   
+    
     document.getElementById('searchInput').value = '';
     document.getElementById('results').innerHTML = `
       <div class="msg-box">
@@ -613,7 +611,7 @@
         <div>Search Scan Document</div>
       </div>`;
 
-    
+   
     closeModal();
 
     
@@ -701,7 +699,7 @@
     }
   }
 
- 
+
   function viewPdf(fileId, fileName) {
     currentFileId   = fileId;
     currentFileName = fileName;
@@ -742,7 +740,7 @@
       .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  
+  // Close modal on backdrop click
   document.getElementById('pdfModal').addEventListener('click', function(e){
     if (e.target === this) closeModal();
   });
