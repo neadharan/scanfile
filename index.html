@@ -31,7 +31,7 @@
       overflow-x: hidden;
     }
 
-    /* ── Background ── */
+   
     #bg-layer {
       position: fixed; inset: 0;
       background: url('neabg.jpg') center/cover no-repeat;
@@ -46,7 +46,7 @@
       z-index: 1;
     }
 
-    /* ── Header ── */
+    
     header {
       position: relative; z-index: 10;
       background: linear-gradient(135deg, #0d1f3c 0%, #1a3a6b 60%, #0d2d18 100%);
@@ -93,7 +93,7 @@
       letter-spacing: 0.8px; text-transform: uppercase; line-height: 1.2;
     }
 
-    /* Logout button */
+    
     #logoutBtn {
       display: none;
       flex-shrink: 0;
@@ -110,7 +110,7 @@
       box-shadow: 0 5px 16px rgba(192,57,43,0.5);
     }
 
-    /* ── Main ── */
+    
     main {
       position: relative; z-index: 10;
       flex: 1;
@@ -121,7 +121,7 @@
       min-height: 0;
     }
 
-    /* ══ LOGIN CARD ══ */
+    
     #loginCard {
       background: rgba(255,255,255,0.97);
       border-radius: 20px;
@@ -134,7 +134,7 @@
       position: relative;
       margin: 25px auto;
     }
-    /* rainbow top bar */
+    
     #loginCard::before {
       content: '';
       position: absolute; top:0; left:0; right:0; height: 5px;
@@ -249,7 +249,7 @@
       font-size: 0.68rem; color: #bbcce0;
     }
 
-    /* ══ SEARCH CARD ══ */
+    
     #searchCard {
       display: none;
       width: 100%; max-width: 900px;
@@ -302,7 +302,7 @@
       background: linear-gradient(135deg, #155e2e, #1a7a3c);
     }
 
-    /* Results */
+   
     #results { margin-top: 22px; }
 
     .result-label {
@@ -354,7 +354,7 @@
     }
     .msg-box .big { font-size: 2.5rem; margin-bottom: 8px; }
 
-    /* Spinner */
+    
     .spinner {
       display: inline-block; width: 22px; height: 22px;
       border: 3px solid #c8daf8; border-top-color: var(--blue);
@@ -363,7 +363,7 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── PDF Modal ── */
+    
     #pdfModal {
       display: none; position: fixed; inset: 0; z-index: 200;
       background: rgba(0,0,0,0.72);
@@ -398,7 +398,7 @@
     #closePdf { font-size: 1.1rem; padding: 6px 10px; }
     #pdfFrame { flex: 1; border: none; width: 100%; }
 
-    /* ── Footer ── */
+    
     footer {
       position: relative; z-index: 10;
       text-align: center; padding: 10px 16px;
@@ -417,7 +417,7 @@
     .ft-clabel { color: #aaffc4; }
     .ft-phone  { color: #ffb347; font-weight: 700; }
 
-    /* Shake animation */
+    
     @keyframes shake {
       0%,100%{ transform:translateX(0); }
       20%    { transform:translateX(-8px); }
@@ -439,7 +439,7 @@
 <div id="bg-layer"></div>
 <div id="bg-overlay"></div>
 
-<!-- ── HEADER ── -->
+
 <header>
   <div class="header-inner">
     <div class="logo-wrap">
@@ -451,25 +451,25 @@
       <h3>Dharan, Sunsari</h3>
       <h4>Consumer Document</h4>
     </div>
-    <!-- Logout button (header right side) -->
+    
     <button id="logoutBtn" onclick="doLogout()">🔒 Logout</button>
   </div>
 </header>
 
-<!-- ── MAIN ── -->
+
 <main>
 
-  <!-- LOGIN CARD -->
+  
   <div id="loginCard">
     <div class="lc-top">
       <img src="nealogo.png" alt="NEA" onerror="this.style.background='#1a3a6b'"/>
       <div class="lc-top-brand">
-        <h1>Nepal Electricity Authority</h1>
-      <h2>Dharan DCS</h2>
-    </div>
+        Nepal Electricity Authority<br>
+        Dharan DCS
+        </div>
     <div class="lc-body">
       <div class="login-title">🔐 System Login</div>
-      <div class="login-sub">कृपया username र password राख्नुहोस्</div>
+      <div class="login-sub">username र password राख्नुहोस्</div>
 
       <div class="field-group">
         <label>👤 Username</label>
@@ -490,11 +490,11 @@
 
       <button id="loginBtn" onclick="doLogin()">🔓 Login →</button>
       <div id="loginError">❌ गलत Username वा Password!</div>
-      <div class="login-badge">🔒 Secure System — NEA Dharan DCS</div>
+      <div class="login-badge">🔒 NEA Dharan DCS</div>
     </div>
   </div>
 
-  <!-- SEARCH CARD -->
+  
   <div id="searchCard">
     <div class="search-title">उपभोक्ता कागजात खोज्नुहोस्</div>
     <div class="search-row">
@@ -513,7 +513,7 @@
 
 </main>
 
-<!-- ── PDF VIEWER MODAL ── -->
+
 <div id="pdfModal">
   <div class="modal-box">
     <div class="modal-header">
@@ -526,7 +526,7 @@
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
+
 <footer>
   <div class="footer-text">
     <span class="ft-label">System Developed By :-</span>
@@ -538,37 +538,35 @@
 </footer>
 
 <script>
-  // ── CONFIG ──
+  
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNNHgheHa6PMo4hBZgRbZBd9CYdOJsEuk9CXkK_Xonu09ChYfu9xg3XbGMcI2tdXUr/exec';
 
-  // ── Auth state (JS variable — works in file:// & http:// both) ──
+  
   var IS_LOGGED_IN = false;
 
   let currentFileId   = '';
   let currentFileName = '';
 
-  // ── INIT ──
+  
   window.addEventListener('load', function () {
-    // Always start at login
+    
     showLogin();
 
-    // Enter key on password → login
+    
     document.getElementById('passwordInput').addEventListener('keydown', function(e){
       if (e.key === 'Enter') doLogin();
     });
-    // Enter key on username → move to password
+    
     document.getElementById('usernameInput').addEventListener('keydown', function(e){
       if (e.key === 'Enter') document.getElementById('passwordInput').focus();
     });
-    // Enter key on search
+    
     document.getElementById('searchInput').addEventListener('keydown', function(e){
       if (e.key === 'Enter') searchDocs();
     });
   });
-
-  // ════════════════════════════
-  //  LOGIN / LOGOUT
-  // ════════════════════════════
+  
+  
   function doLogin() {
     const u = document.getElementById('usernameInput').value.trim();
     const p = document.getElementById('passwordInput').value.trim();
@@ -589,7 +587,7 @@
       errBox.innerHTML = '❌ गलत Username वा Password!';
       document.getElementById('passwordInput').value = '';
       document.getElementById('passwordInput').focus();
-      // Shake animation
+      
       const card = document.getElementById('loginCard');
       card.style.animation = 'none';
       void card.offsetWidth;
@@ -602,12 +600,12 @@
 
     IS_LOGGED_IN = false;
 
-    // Clear inputs
+   
     document.getElementById('usernameInput').value = '';
     document.getElementById('passwordInput').value = '';
     document.getElementById('loginError').style.display = 'none';
 
-    // Clear search
+   
     document.getElementById('searchInput').value = '';
     document.getElementById('results').innerHTML = `
       <div class="msg-box">
@@ -615,10 +613,10 @@
         <div>Search Scan Document</div>
       </div>`;
 
-    // Close modal if open
+    
     closeModal();
 
-    // Back to login
+    
     showLogin();
   }
 
@@ -643,9 +641,7 @@
     else                         { pwd.type = 'password'; eye.textContent = '👁'; }
   }
 
-  // ════════════════════════════
-  //  SEARCH
-  // ════════════════════════════
+
   async function searchDocs() {
     if (!IS_LOGGED_IN) { showLogin(); return; }
 
@@ -700,14 +696,12 @@
       resultsDiv.innerHTML = `
         <div class="msg-box">
           <div class="big">⚠️</div>
-          <div>Server सँग जडान हुन सकिएन।</div>
+          <div>No Data Found</div>
         </div>`;
     }
   }
 
-  // ════════════════════════════
-  //  PDF VIEWER
-  // ════════════════════════════
+ 
   function viewPdf(fileId, fileName) {
     currentFileId   = fileId;
     currentFileName = fileName;
@@ -748,7 +742,7 @@
       .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // Close modal on backdrop click
+  
   document.getElementById('pdfModal').addEventListener('click', function(e){
     if (e.target === this) closeModal();
   });
