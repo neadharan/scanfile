@@ -142,25 +142,39 @@
       z-index: 1;
     }
 
-    .lc-top {
-      background: linear-gradient(135deg, #0d1f3c, #1a3a6b, #1a4d2a);
-      padding: 22px 28px 16px;
-      text-align: center;
-      justify-content:flex-start;
-      border-bottom: 3px solid var(--gold);
-    }
-    .lc-top img {
-      width: 62px; height: 62px;
-      border-radius: 50%;
-      border: 3px solid var(--gold);
-      box-shadow: 0 0 0 3px rgba(212,160,23,0.22);
-      object-fit: contain; background: #fff;
-      display: block; margin: 0 auto 8px;
-    }
-    .lc-top-brand {
-      font-size: 0.76rem; color: #a8f0c0;
-      font-weight: 500; letter-spacing: 0.3px;
-    }
+.lc-top {
+  background: linear-gradient(135deg, #0d1f3c, #1a3a6b, #1a4d2a);
+  padding: 22px 20px 16px;
+  border-bottom: 3px solid var(--gold);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+
+  text-align: left;
+}
+
+.lc-top img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.22);
+  object-fit: contain;
+  background: #fff;
+
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.lc-top-brand {
+  font-size: 0.76rem;
+  color: #a8f0c0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
 
     .lc-body { padding: 20px 26px 18px; }
 
